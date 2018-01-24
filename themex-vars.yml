@@ -1,0 +1,21 @@
+backup_venv: /etc/duplicity/venv
+backup_profiles:
+
+# Backup file path
+- name: /etc
+  schedule: 0 3 * * *                             # At 3am every day
+  source: /etc
+  target: "s3://s3.amazonaws.com/{{ aws_backup_bucket }}/themex/files/etc"
+
+# Backup file path
+- name: /home/theme
+  schedule: 0 3 * * *                             # At 3am every day
+  source: /home/theme
+  target: "s3://s3.amazonaws.com/{{ aws_backup_bucket }}/themex/files/home/theme"
+
+# Backup postgresql database
+- name: postgresql
+  schedule: 0 4 * * *                             # At 4am every day
+  source: postgresql://theme
+  target: "s3://s3.amazonaws.com/{{ aws_backup_bucket }}/themex/database"
+  user: postgres

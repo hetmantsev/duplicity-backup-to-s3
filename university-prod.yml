@@ -1,0 +1,17 @@
+backup_venv: /edx/app/venvs/duplicity
+backup_profiles:
+
+# Backup mysql database
+- name: mysql
+  schedule: 0 4 * * *                             # At 4am every day
+  source: mysql://
+  target: "s3://s3.amazonaws.com/{{ aws_backup_bucket }}/university-prod/database/mysql"
+  user: mysql
+
+# Backup mongo database
+- name: mongo
+  schedule: 30 3 * * *                            # At 3:30am every day
+  source: mongo://
+  target: "s3://s3.amazonaws.com/{{ aws_backup_bucket }}/university-prod/database/mongo"
+  user: root
+

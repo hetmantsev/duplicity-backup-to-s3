@@ -1,0 +1,9 @@
+backup_venv: /etc/duplicity/venv
+backup_profiles:
+
+# Backup mysql database
+- name: mysql
+  schedule: 0 4 * * *                             # At 4am every day
+  source: mysql://sukharidb
+  target: "s3://s3.amazonaws.com/{{ aws_backup_bucket }}/sukhari/database"
+  user: mysql

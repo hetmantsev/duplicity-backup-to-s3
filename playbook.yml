@@ -1,0 +1,9 @@
+- hosts: localhost
+  connection: local
+  roles:
+    - duplicity-backup
+ 
+  vars:
+    backup_target_user: aws_access_key
+    backup_target_pass: aws_secret
+    aws_backup_bucket: "my-aws-bucket"
